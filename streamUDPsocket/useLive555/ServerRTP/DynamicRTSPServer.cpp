@@ -81,7 +81,7 @@ static ServerMediaSession *createNewSMS(UsageEnvironment &env, char const *fileN
 	ServerMediaSession *sms = NULL;
 	Boolean const reuseSource = True;
 	if (!strcmp(extension, ".mp3")){
-		env << "QAQ"; 
+		env << "mp3\n"; 
 		// Assumed to be a MPEG-1 or 2 Audio file:
 		NEW_SMS("MPEG-1 or 2 Audio");
 		Boolean useADUs = False;
@@ -89,6 +89,7 @@ static ServerMediaSession *createNewSMS(UsageEnvironment &env, char const *fileN
 		sms->addSubsession(MP3AudioFileServerMediaSubsession::createNew(env, fileName, reuseSource, useADUs, interleaving));
 	} 
 	else if (!strcmp(extension, ".mpg")){
+		env << "mpg\n"; 
 		// Assumed to be a MPEG-1 or 2 Program Stream (audio+video) file:
 		NEW_SMS("MPEG-1 or 2 Program Stream");
 		MPEG1or2FileServerDemux *demux = MPEG1or2FileServerDemux::createNew(env, fileName, reuseSource);
@@ -99,6 +100,7 @@ static ServerMediaSession *createNewSMS(UsageEnvironment &env, char const *fileN
 		OutPacketBuffer::maxSize = 100000; // allow for some possibly large VP8 or VP9 frames
 		NEW_SMS("Matroska video+audio+(optional)subtitles");
 
+		env << "mkv\n"; 
 		// Create a Matroska file server demultiplexor for the specified file.
 		// (We enter the event loop to wait for this to complete.)
 		MatroskaDemuxCreationState creationState;
