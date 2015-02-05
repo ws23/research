@@ -1,4 +1,4 @@
-#include <BasicUsageEnvironment.hh>
+#include "BasicUsageEnvironment.hh"
 #include "DynamicRTSPServer.hh"
 
 int main(int argc, char *argv[]){
@@ -23,9 +23,9 @@ int main(int argc, char *argv[]){
 	char *urlPrefix = rtspServer->rtspURLPrefix();
 	*env << "Play streams from this server using the URL\n\t" << urlPrefix << "<filename>\nwhere <filename> is a file present in the current directory.\n";
 	*env << "Each file's type is inferred from its name suffix:\n";
-	*env << "\t\".mkv\" => a Matroska audio+video+(optional)subtitles file\n";
+	*env << "\t\".mkv\" or \".webm\" => a Matroska audio+video+(optional)subtitles file\n";
 	*env << "\t\".mp3\" => a MPEG-1 or 2 Audio file\n";
-	*env << "\t\".mpg\" => a MPEG-1 or 2 Program Stream (audio+video) file\n";
+	*env << "\t\".mpg\" => a MPEG-1 or 2 video file\n";
 
 	env->taskScheduler().doEventLoop(); // does not return
 

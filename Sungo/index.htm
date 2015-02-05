@@ -1,0 +1,315 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<style>
+<!--
+  .head     { background-color: #999999 }
+-->
+</style>
+</head>
+
+<body>
+
+<p><font color="#0000FF">Title:</font> <font color="#008000">JMF-Java Media 
+Framework API(Java多媒體應用套件)，安裝與簡易使用教學。</font><br>
+<font color="#0000FF">Author:</font>&nbsp; <font color="#008000">Sungo。</font><br>
+<font color="#0000FF">Date: </font><font color="#008000">&nbsp;2004/03/11。</font><br>
+<font color="#0000FF">OS:</font> <font color="#008000">Windows XP Professional。<br>
+</font> <font color="#0000FF">版權:</font><font color="#008000"> 僅提供JSPtw討論區的朋友參考使用。<br>
+<br>
+</font>
+<img border="0" src="images/Line.gif" width="559" height="7"><br>
+<br>
+<br>
+Java提供了JMF這個套件，使我們能夠輕鬆的製作出多媒體<br>
+(影像、動畫、聲音..等)程式。由於JMF並不包含在JDK裡，<br>
+所以我們先必須到Sun的網站下載該套件。(在使
+用JMF套件<br>
+時，請先裝置好JDK並設好JDK的CLASSPATH。)<br>
+<br>
+<br>
+關於JDK的下載與CLASSPATH設置，可參考JSPtw的這篇文章：<br>
+<a target="_blank" href="http://www.jsptw.com/jute/post/view?bid=29&id=18621&sty=3&age=-1&tpg=1&ppg=1#18621">
+Re:[徵文] 如何寫您生平第一個 java 程式 [Re:worookie] </a><br>
+<br>
+<br>
+<b><font color="#FF00FF">◎步驟一：請先連結至Sun的JMF下載頁面：</font></b><br>
+<br>
+JMF下載的網址：<br>
+<a target="_blank" href="http://java.sun.com/products/java-media/jmf/2.1.1/download.html">
+http://java.sun.com/products/java-media/jmf/2.1.1/download.html</a><br>
+<br>
+<br>
+<br>
+<br>
+<b><font color="#FF00FF">◎步驟二：請點選紅色方塊Download處，進入下一頁面：</font></b><br>
+<br>
+<img border="0" src="images/JMF-Download01.gif" width="463" height="240"><br>
+<br>
+<b><font color="#FF00FF"><br>
+<br>
+<br>
+◎步驟三：看完說明後，點選同意，進入下一頁面。</font></b><br>
+<br>
+<img border="0" src="images/JMF-Download02.gif" width="567" height="311"></p>
+<p><b><font color="#FF00FF"><br>
+<br>
+<br>
+◎步驟四：選擇Windows平台開始下載JMF。<br>
+</font></b><br>
+<img border="0" src="images/JMF-Download03.gif" width="580" height="271"><br>
+<br>
+<br>
+<br>
+<br>
+<font color="#FF00FF"><b>◎步驟五：安裝JMF，
+安裝過程中，按照內定的預設值即可，不需作<br>
+更改。</b></font><b><font color="#FF00FF"><br>
+</font></b>
+<br>
+<img border="0" src="images/Install-JMF-Default.gif" width="475" height="359"><br>
+<br>
+<br>
+<br>
+安裝完畢後，我們可以發現，CLASSPATHH已經自動加入JMF<br>
+套件的路徑了。如果想自己手動加入JMF的CLASSPATH，那在<br>
+安裝過程中，在選擇安裝項目時
+，請將Make necessary change to<br>
+PATH and CLASSPATH這個選項取消。<br>
+<br>
+將以下3行加入環境變數的CLASSPATH內，註：<br>
+C:\Program Files\JMF2.1.1e為預設的安裝路徑，即<br>
+JMF所在的目錄。<br>
+<font color="#0000FF"><br>
+C:\Program Files\JMF2.1.1e\lib\sound.jar;<br>
+C:\Program Files\JMF2.1.1e\lib\jmf.jar;<br>
+C:\Program Files\JMF2.1.1e\lib;</font><br>
+<br>
+<br>
+<br>
+<img border="0" src="images/Line.gif" width="559" height="7"><br>
+<br>
+下載以及安裝完JMF後，當然少不了JMF的使用說明文件，它並不包含在JMF<br>
+主程式中，所以我們也必須自行至Sun下載。<br>
+<br>
+<br>
+JMF說明文件下載處：<br>
+<a href="http://java.sun.com/products/java-media/jmf/2.1.1/specdownload.html">
+http://java.sun.com/products/java-media/jmf/2.1.1/specdownload.html</a><br>
+<b><font color="#FF00FF"><br>
+<br>
+<br>
+◎請點選下圖紅色方塊處，再來的步驟跟上述的JMF下載的流程差<br>
+不多，請參考上方流程。</font></b><br>
+<br>
+<img border="0" src="images/Doc-Download.gif" width="299" height="373"><br>
+<br>
+<br>
+<br>
+下載完後將其解壓縮，放置在您喜歡的目錄即可，<br>
+我是習慣將其放在JDK的資料夾下。<br>
+<br>
+<br>
+Java doc的瀏覽工具，推薦使用JavaDOCHelper，可由<br>
+下列網址下載：<br>
+<br>
+<a target="_blank" href="http://www.javatoolsoft.com/">
+http://www.javatoolsoft.com/</a><br>
+<br>
+<br>
+<font size="2" color="#FF0000">(JavaDOCHelper展示圖)<br>
+</font><br>
+<img border="0" src="images/JavaDocHelper.gif" width="600" height="393"><br>
+<br>
+<br>
+<br>
+<img border="0" src="images/Line.gif" width="559" height="7"></p>
+<p><br>
+接下來我們便可以利用JMF開始撰寫我們的程式了。底下我利用JMF寫一個簡易的<br>
+音效播放器，可供您測試JMF是否有設置成功。&lt;該原始檔放置於Sungo目錄下&gt;<br>
+<br>
+<br>
+<font color="#008000" size="2">(檔名：JMFTest.java)</font></p>
+<table border="0" width="500" id="table1" bgcolor="#000000">
+	<tr>
+		<td><font color="#FFFFFF">import java.awt.*;<br>
+		import java.awt.event.*;<br>
+		import java.io.*;<br>
+		import javax.swing.*;<br>
+		import javax.media.*;<br>
+		<br>
+		public class JMFTest<br>
+		extends JFrame {<br>
+		private Player player;<br>
+		private File file;<br>
+		<br>
+		public JMFTest() {<br>
+		super(&quot;JMF-測試程式(by Sungo)&quot;);<br>
+		<br>
+		JButton openFile = new JButton(&quot;請選取要播放的音效檔 (*.Wav、*.MP3、*.MIDI..)&quot;);<br>
+		openFile.setFont(new java.awt.Font(&quot;細明體&quot;, 0, 15));<br>
+		openFile.setForeground(new Color(255, 255, 255));<br>
+		openFile.setBackground(new Color(204, 102, 255));<br>
+		openFile.addActionListener(<br>
+		new ActionListener() {<br>
+		public void actionPerformed(ActionEvent e) {<br>
+		openFile();<br>
+		createPlayer();<br>
+		}<br>
+		}<br>
+		);<br>
+		getContentPane().add(openFile, BorderLayout.SOUTH);<br>
+		<br>
+		setSize(365, 84);<br>
+		show();<br>
+		try {<br>
+		jbInit();<br>
+		}<br>
+		catch (Exception e) {<br>
+		e.printStackTrace();<br>
+		}<br>
+		}<br>
+		<br>
+		private void openFile() {<br>
+		JFileChooser fileChooser = new JFileChooser();<br>
+		<br>
+		fileChooser.setFileSelectionMode(<br>
+		JFileChooser.FILES_ONLY);<br>
+		int result = fileChooser.showOpenDialog(this);<br>
+		if (result == JFileChooser.CANCEL_OPTION) {<br>
+		file = null;<br>
+		}<br>
+		else {<br>
+		file = fileChooser.getSelectedFile();<br>
+		}<br>
+		}<br>
+		<br>
+		private void createPlayer() {<br>
+		if (file == null) {<br>
+		return;<br>
+		}<br>
+		removePreviousPlayer();<br>
+		try {<br>
+		player = Manager.createPlayer(file.toURL());<br>
+		player.addControllerListener(new EventHandler());<br>
+		player.start();<br>
+		}<br>
+		catch (Exception e) {<br>
+		JOptionPane.showMessageDialog(this,<br>
+		&quot;檔案類型錯誤！或是找不到該檔案位置！&quot;,<br>
+		&quot;錯誤訊息提示&quot;,<br>
+		JOptionPane.ERROR_MESSAGE);<br>
+		}<br>
+		}<br>
+		<br>
+		private void removePreviousPlayer() {<br>
+		if (player == null) {<br>
+		return;<br>
+		}<br>
+		player.close();<br>
+		Component visual = player.getVisualComponent();<br>
+		Component control = player.getControlPanelComponent();<br>
+		Container c = getContentPane();<br>
+		if (visual != null) {<br>
+		c.remove(visual);<br>
+		}<br>
+		if (control != null) {<br>
+		c.remove(control);<br>
+		}<br>
+		}<br>
+		<br>
+		public static void main(String args[]) {<br>
+		JMFTest app = new JMFTest();<br>
+		app.addWindowListener(<br>
+		new WindowAdapter() {<br>
+		public void windowClosing(WindowEvent e) {<br>
+		System.exit(0);<br>
+		}<br>
+		}<br>
+		);<br>
+		}<br>
+		<br>
+		private class EventHandler<br>
+		implements ControllerListener {<br>
+		public void controllerUpdate(ControllerEvent e) {<br>
+		if (e instanceof RealizeCompleteEvent) {<br>
+		Container c = getContentPane();<br>
+		Component visualComponent =<br>
+		player.getVisualComponent();<br>
+		if (visualComponent != null) {<br>
+		c.add(visualComponent, BorderLayout.CENTER);<br>
+		<br>
+		}<br>
+		Component controlsComponent =<br>
+		player.getControlPanelComponent();<br>
+		<br>
+		if (controlsComponent != null) {<br>
+		c.add(controlsComponent, BorderLayout.NORTH);<br>
+		<br>
+		}<br>
+		c.doLayout();<br>
+		}<br>
+		}<br>
+		}<br>
+		<br>
+		private void jbInit() throws Exception {<br>
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);<br>
+		this.getContentPane().setBackground(new Color(0, 102, 255));<br>
+		this.setResizable(false);<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p><br>
+<br>
+<font color="#FF0000">於DOS下編譯以及執行的圖：</font><br>
+<br>
+<img border="0" src="images/Demo.gif" width="431" height="240"><br>
+<br>
+<br>
+<br>
+<img border="0" src="images/Line.gif" width="559" height="7"></p>
+
+<p><font color="#FF0000">◎再來是示範如何在JBuilder中使用JMF。(我使用的是JBuilderX，所<br>
+以下步驟皆為X版為主，其餘版本以此類推。)</font><br>
+<br>
+<br>
+<font color="#008080">步驟一：開啟JBuilder後，在功能表Tools選Configure Libraries，進行設定。</font><br>
+<br>
+　</p>
+<p><font color="#008080">步驟二：按New，開啟設定Library設定精靈，Name打JMF，按Add鈕選擇<br>
+JMF安裝目錄下的lib資料夾(C:\Program Files\JMF2.1.1e\lib)按OK後，即會<br>
+出現下圖的PATH。</font><br>
+<br>
+<img border="0" src="images/JBX-01.gif" width="554" height="414"><br>
+<br>
+<br>
+<br>
+<font color="#008080">再次按OK，結束設定視窗。</font><br>
+<br>
+<img border="0" src="images/JBX-02.gif" width="600" height="381"></p>
+<p><br>
+<br>
+<br>
+<font color="#008080">步驟三：於專案內加入JMF。功能表Project點選Project Properties，<br>
+於Paths-&gt;Required Libraries頁面，按Add，加入剛才我們設定的<br>
+JMF程式庫。(如下圖)</font><br>
+<br>
+<img border="0" src="images/JBX-03.gif" width="600" height="398"><br>
+<br>
+<br>
+<br>
+<br>
+<font color="#008080">步驟四：編譯測試檔，看是否順利執行。(下圖為順利執行的展示圖)</font><br>
+<br>
+<img border="0" src="images/JBX-04.gif" width="594" height="342"><br>
+　</p>
+<p>
+<img border="0" src="images/Line.gif" width="559" height="7"></p>
+<p><b><font color="#FF0000" size="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(END)</font></b></p>
+
+</body>
+
+</html>
