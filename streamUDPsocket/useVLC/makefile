@@ -1,3 +1,5 @@
-main: 
-	rm *.out
-	gcc timing.c -o timing.out -O2 -Wall -Wshadow
+main: clean timing.c
+	gcc timing.c -o timing.out -O2 -lpthread
+
+clean: 
+	rm -rf *.o *.gch *.out 

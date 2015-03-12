@@ -2,50 +2,103 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
+#include <signal.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <pthread.h>	
 
-#define MP3FILE "test.mp3"
+#define MEDIAFILE "test.mp3"
 #define STREAM "test"
 #define PORT 8554
-
-int main(int argc, char *argv[]){
-	struct timeval start, end;  
-	double startTime, timeUse; 
-	FILE *fin = NULL, *fout = NULL; 
-	char arg1[255] = {}, arg2[255] = {}; 
-	if(argc!=2 && argc!=3)
-		printf("Usage: %s <record file> [start time record file]", argv[0]); 
+#define STARTFILE "start.txt"
 
 
-	/* prepare of all files */
-	if(argc==3)								// start time record file
-		fin = fopen(argv[2], "r"); 		 
-	fout = fopen(argv[1], "w"); 			// record file
+void *calcTime();	//	Calcutate the timing 
+void *execCVLC();	//	Execute the VLC
+void *controlQ();	//	Control which time need to exit VLC
 
-	/* prepare of command variables */
-	if(argc==3)
-		fscanf(fin, "%lf", &startTime); 
+int state;	// 0.begin	1.execVLC	2.exitVLC 3.interruptVLC
+double startTime; 
 
-	gettimeofday(&start, NULL); 
+pthread_t tid1, tid2, tid3; 
 
-	sprintf(arg1, "--sout='#rtp{sdp=rtsp://:%d/%s}'", PORT, STREAM); 
-	if(argc==3)
-		sprintf(arg2, "--start-time=%.2lf", startTime); 
-	execlp("cvlc", "cvlc", "-vvv", MP3FILE, "--sout-standard-access=udp", "--sout-standard-mux=rtp", "--sout='#transcode{vcodec=h264, acodec=mpga, ab=128, channels=2, samplerate=44100}'", arg1, arg2, NULL); 
-	printf("cvlc -vvv %s %s %s\n", MP3FILE, arg1, arg2); 
-
-
-	fork(); 
-	gettimeofday(&end, NULL);
-	timeUse = 1000000 * ( end.tv_sec - start.tv_sec ) + end.tv_usec - start.tv_usec; 
-	timeUse /= 1000000;
+int main(){
+	FILE *fin; 
 	
-	printf("%lf\n", timeUse);    
-	fprintf(fout, "%lf\n", timeUse); 
-	if(fin!=NULL)
-		fclose(fin); 
-	fclose(fout); 
+	state = 0; 
+	startTime = 0; 
+	fin = fopen(STARTFILE, "r"); 		 
+	fscanf(fin, "%lf", &startTime); 
+
+	pthread_create(&tid2, NULL, &execCVLC, NULL); 
+	pthread_create(&tid3, NULL, &controlQ, NULL); 
+	pthread_create(&tid1, NULL, &calcTime, NULL); 
+
+	pthread_join(tid2, NULL); 
+	pthread_join(tid3, NULL); 
+	pthread_join(tid1, NULL); 
 
 	return 0; 	
+}
+
+void *calcTime(){
+	struct timeval start, end; 
+	double timeUse; 
+	FILE *fd, *fout = fopen(STARTFILE, "w"); 
+	int i, pid; 
+
+	gettimeofday(&start, NULL); 
+	while(state<2){
+		printf("calTime: %d\n", state); 
+		sleep(1); 
+	} 
+	gettimeofday(&end, NULL); 
+	
+	timeUse = 1000000 * ( end.tv_sec-start.tv_sec ) + end.tv_usec-start.tv_usec; 
+	timeUse /= 1000000; 
+
+	if(state==3){
+		printf("%lf\n", timeUse+startTime); 
+		fprintf(fout, "%lf\n", timeUse+startTime); 
+	}
+	else if(state==2){
+		printf("0\n"); 
+		fprintf(fout, "0\n"); 
+	}
+	fd = popen("ps | grep vlc", "r"); 
+	fscanf(fd, "%d", &pid); 
+	pclose(fd); 
+	fclose(fout); 
+	kill(pid, SIGKILL); 
+	exit(0); 
+}
+
+void *execCVLC(){
+	char cmd[255], cmd2[255]; 
+	FILE *fd; 
+	int err; 
+	state = 1; 
+	sprintf(cmd, "cvlc %s --no-loop --no-repeat --play-and-exit --sout='#rtp{sdp=rtsp://:%d/%s}' --start-time=%.2lf", MEDIAFILE, PORT, STREAM, startTime); 
+
+	err = system(cmd); 	
+	if(err==0)
+		state = 2; 
+	else
+		state = 4; 
+	pthread_exit(NULL); 
+}
+
+
+void *controlQ(){
+	char c; 
+	while(state==0){
+		printf("controlQ: %d\n", state); 	
+	}
+	printf("Enter 'q' to Exit. \n");  
+	do{
+		c = getchar(); 
+	}while(c!='q'); 
+	state = 3; 
+	pthread_exit(NULL); 
 }
